@@ -1,39 +1,41 @@
-# flask-spotify-app
-flask-spotify-app
-`
-# RESUME
+# Create a flask app using spotify API
 
-Explain app
 
-1) Requirements
+## Requirements
 - python3
 - requests
 - flask
 
-2) Setup (local use)
+
+## Notes
+- Authentification (token)
+- What is callback URI ?
+- Spotify API (top artists stats)
+
+
+## Setup (local use)
+1. git clone project
+```
 git clone
-python3 app.py
-
-3) Access
-http://127.0.0.1:5000/
-
-# Authentification (token)
-
-1) How to get Spotify callback URI, client ID and secret ?
+```
+2. modify app.py with callback URI, client ID and secret
+```
+How to get Spotify callback URI, client ID and secret ?
 https://support.heateor.com/get-spotify-client-id-client-secret/
+```
+3. launch app
+``` 
+python3 app.py
+```
+4. Access
+```
+http://127.0.0.1:5000/
+```
 
-2) What is callback URI ?
-
-
-# Spotify API (top artists stats)
-
-
-# Secure flask with HTTPS
-
-
-# Hosting your APP on cloud
-
-1) HTTPS cerificate (cloudfare)
-2) Cloud RUN (hebergement de l'application + nom de domaine + certificat https ???)
+# TO DO
+1. Secure flask with HTTPS
+2. Hosting your APP on cloud
+2.1. HTTPS cerificate (cloudfare)
+2.2. Cloud RUN (hebergement de l'application + nom de domaine + certificat https ???)
 
 
