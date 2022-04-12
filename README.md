@@ -6,6 +6,9 @@ flask-spotify-app
 Explain app
 
 1) Requirements
+- python3
+- requests
+- flask
 
 2) Setup (local use)
 git clone
