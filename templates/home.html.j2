@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+  </head>
+  <body>
+<div class="background">      
+        <h1 class="logo"> {% include 'base64-logo.html' %} <br> &nbsp; My Top Artists</h1>
+      <ol class="custom">
+          {% for i in data['items'] %}
+              <li>
+              <a href="{{ i['external_urls']['spotify'] }}"><img style="vertical-align:middle" src="{{ i['images'][0]['url'] }}" target="_blank" ></a>
+              <span style=""><a href="{{ i['external_urls']['spotify'] }}" target="_blank" >{{ i['name'] }}</a></span>
+              </li>
+          {% endfor %}
+          <br><br><br><br>
+          <a href="https://accounts.spotify.com/logout">Log Out</a>
+      </ol>
+</div>
+
+
+<div class="footer-dark">
+  <footer>
+      <div class="container">
+              <div class="col-md-6 item text">
+                  <A HREF="mailto:keny.bapin@gmail.com">keny.bapin@gmail.com</A>
+                  <br>
+                  <A HREF="https://github.com/kenybapin">github.com/kenybapin</A>
+                  <br><br>
+                  <p>2022</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+</div>
+
+</body>
+</html>

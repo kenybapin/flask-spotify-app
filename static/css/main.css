@@ -1,0 +1,146 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin:0;
+  overflow: hidden;
+}
+
+/* ============= Title ============= */
+
+  h1 {
+    padding-left: 20px;
+    font-size: 50px;
+    font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    opacity: .7;
+    letter-spacing: -1px;
+    word-spacing: -5px;
+  }
+
+
+/* ============= Images ============= */
+
+  img {
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    transition: transform .6s;
+    filter: brightness(80%);
+  }
+
+
+
+  img:hover{
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1); 
+    transform: scale(1.1);
+    filter: brightness(120%);
+    }
+
+  img.logo {
+    height: auto;
+    width: 150px;
+    filter: sepia(0.5) brightness(1.5);
+    transition: none;
+    pointer-events: none;
+  }
+
+/* ============= Hyperlink text ============= */
+
+  a {
+    font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+    color: rgb(245, 245, 245);
+    opacity: .8;
+    font-size: 20px;
+    font-weight: bold;
+    transform: scale(10);
+    transition: all 0.3s ease-in-out 0.2s;
+  }
+  a:link { text-decoration: none; }
+
+/* ============= Artists rank list ============= */
+
+  ol.custom {
+    list-style-type: none;
+    margin-left: 0;
+    position: absolute;
+  }
+  
+  ol.custom > li {
+    counter-increment: customlistcounter;
+  }
+  
+  ol.custom > li:before {
+    content: "#" counter(customlistcounter);
+    font-weight: bold;
+    font-size: 42px;
+    font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+    opacity: .6;
+    color: rgb(176, 214, 70);
+    padding: 5px;
+  }
+  
+  ol.custom:first-child {
+    counter-reset: customlistcounter;
+  }
+
+/* ============= Animation background ========= */
+.background {
+  background: linear-gradient(132deg, #27e17e, #1b51c5, #1ccac4f5);
+  background-size: 400% 400%;
+  animation: Gradient 10s ease infinite;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ============= Animate Background ============= */
+@keyframes Gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* ============= Footer ============= */
+
+.footer-dark {
+  width: 100%;
+  color:#f0f9ff;
+  background-color:#282d32;
+  position: absolute;
+  bottom: 0;
+  opacity: .9;
+}
+
+.footer-dark p {
+  margin-top:0;
+  margin-bottom:12px;
+  font-weight:bold;
+  font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+  font-size:12px;
+}
+
+.footer-dark a {
+  margin-top:0;
+  margin-bottom:12px;
+  text-decoration: none;
+  color: #c3c3c4;
+  font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+  font-size:12px;
+}
+
+.footer-dark .item.text {
+  margin-bottom:26px;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.footer-dark .item.text p {
+  opacity:0.6;
+  margin-bottom:0;
+}
