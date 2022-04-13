@@ -1,4 +1,4 @@
-# Create a flask app using spotify API
+# Create a spotify app with flask
 
 
 ## Requirements
