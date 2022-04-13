@@ -5,12 +5,12 @@ app = Flask(__name__)
 # DIsabling cache,  note:  Flask didn't see the updates in JS and CSS files
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-APP_ID = 'cc57db2e4e4d4f1ca09307a25f8a2e50'
-APP_SECRET = 'a370ef230341461fafd93b612b0809f3'
+REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
+APP_ID = '###################'
+APP_SECRET = '###################'
 app.secret_key = APP_SECRET
 
 API_BASE = 'https://accounts.spotify.com'
-REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
 SCOPE = 'user-top-read'
 SHOW_DIALOG = False
 
