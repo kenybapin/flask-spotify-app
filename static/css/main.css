@@ -1,0 +1,318 @@
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+img {
+	height: 100%;
+	padding: 4px;
+	transition: transform .6s;
+	filter: brightness(80%);
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+}
+
+ol {
+	margin-bottom: 50;
+}
+
+/* User info */
+
+img.avatar {
+	vertical-align: middle;
+	height: 120px;
+	width: 120px;
+	padding: 0;
+	border-radius: 50%;
+	border: 2px solid rgb(186, 186, 186);
+}
+
+img.logo {
+	height: auto;
+	width: 90px;
+	filter: sepia(0.5) brightness(1.5);
+	transition: none;
+	padding: 0;
+	margin: -5;
+	border-radius: 0%;
+	pointer-events: none;
+}
+
+section.avatar > p {
+	text-align: left;
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 10px;
+	font-size:  1.3rem;
+	color: rgb(255, 255, 255);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	margin: 0;
+}
+
+a.maintitle {
+	color: rgb(242, 242, 242);
+	text-decoration: none;
+	font-weight: medium;
+	font-size: 30px;
+}
+
+a.username {
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+	font-size:  1.3rem;
+}
+
+a.userfollowers {
+	color: rgb(192, 191, 191);
+	text-decoration: none;
+	font-size:  0.8rem;
+}
+
+a.licence {
+	color: rgb(240, 213, 11);
+	text-decoration: none;
+	font-size: 12px;
+}
+
+a.avatar {
+	text-align: left;
+	margin:  1rem 0;
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	color: rgb(245, 245, 245);
+	opacity: .8;
+	padding-left: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transform: scale(10);
+	transition: all 0.3s ease-in-out 0.2s;
+}
+
+section.avatar {
+	display: inline-block;
+	margin:  0.25rem;
+	padding:  1rem;
+	width:  100%;
+	margin-left: auto;
+    margin-right: auto;
+	background-color: rgba(14, 14, 14, 0);
+}
+
+
+/* Saved songs */
+
+section.saved_tracks {
+	color: rgb(242, 242, 242);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	text-align: center;
+	vertical-align:middle;
+}
+
+
+
+/* Recently played */
+
+img.results {
+	height: 60px;
+	width: 60px;
+	float: left;
+	border-radius: 0%;
+	right:0px;
+}
+
+img.results:hover {
+	-ms-transform: scale(1.1);
+	-webkit-transform: scale(1.1); 
+	transform: scale(1.3);
+	filter: brightness(120%);
+	right: 30px;
+}
+
+img.results_top_album {
+	height: 170px;
+	width: 170px;
+	border-radius: 0%;
+	float: left;
+	margin-bottom: 80;
+}
+
+ol.results > li {
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	list-style-type: none;
+	padding-left: 0;
+}
+
+ol.results > li > a {
+	color: rgb(208, 206, 206);
+	font-size: 10px;
+	vertical-align:top;
+	text-align: left;
+	list-style-type: none;
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+}
+
+ol.results > li > a.trackname {
+	color: rgb(166, 166, 166);
+	text-decoration: none;
+	font-size: 12px;
+}
+
+ol.results > li > a.trackname:hover {
+	text-decoration: none;
+	animation:blinkingText 0.3s infinite;
+}
+
+ol.results > li > a.artist {
+	color: rgb(251, 251, 251);
+	text-decoration: none;
+	font-size: 14px;
+}
+
+ol.results > li > a.artist:hover {
+	text-decoration: none;
+	animation:blinkingText 0.3s infinite;
+}
+
+ol.results > li > a.genre {
+	color: rgb(175, 175, 175);
+	text-decoration: none;
+	font-size: 12px;
+}
+
+ol.results > li > a.artistfollowers {
+	color: rgb(201, 148, 24);
+	text-decoration: none;
+	font-size: 12px;
+}
+
+@keyframes blinkingText{
+    0%{  color: rgb(234, 210, 26);    }
+    100%{  color: rgb(107, 90, 3);    }
+}
+
+/* Disconnect */
+
+
+img.disconnect {
+	height: 75px;
+	width: 65px;
+	filter: sepia(0.5) brightness(1.5);
+	border-radius: 0%;
+	text-align:center;
+	margin:auto;
+	display:flex;
+}
+
+img.disconnect:hover{
+    filter: opacity(.5) drop-shadow(0 0 0 red);
+}
+
+
+section.temp {
+	background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/* ################################################ */
+
+
+
+
+
+article {
+	column-width: 400px;
+	column-gap: 0.7em;
+}
+
+section {
+	display: inline-block;
+	margin:  0.10rem;
+	width:  100%; 
+	border-radius: 3px;
+	background-color: rgba(34, 34, 34, 0.444);
+	margin-bottom: 10px;
+}
+
+
+
+
+a {
+	text-align:  left;
+	margin:  1rem 0;
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	color: rgb(245, 245, 245);
+	opacity: .8;
+	padding-left: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	transform: scale(10);
+	transition: all 0.3s ease-in-out 0.2s;
+}
+
+
+
+
+h1 {
+	font-size:  3rem;
+	font-weight:  800;
+	color: rgb(156, 156, 156);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+	font-size:  1.3rem;
+	color: rgb(231, 230, 230);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	padding-left: 25px;
+}
+
+h4 {
+	font-size:  4.3rem;
+	color: rgb(231, 230, 230);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	margin: 20;
+}
+
+h5 {
+	font-size:  0.8rem;
+	color: rgb(231, 230, 230);
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+}
+
+body {
+	line-height:  1.25;
+	padding:  1em;
+	background: linear-gradient(-75deg, #ee7752, #06935f, #02384b, #76511f);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: auto;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+section.about {
+	background-color: black;
+	opacity: .6;
+	max-width: auto;
+	padding: 20;
+}
+
+section.about > p {
+	color: ghostwhite;
+	font-family: "Gotham Medium", Helvetica, Arial, sans-serif;
+	font-size: small;
+}

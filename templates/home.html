@@ -1,0 +1,129 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourStats Spotify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+</head>
+
+<body>
+
+
+  <section class="avatar">
+    <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
+    <p>
+    <a class="maintitle">{% include 'base64-logo.html' %} </a><br>
+    <a class="username">{{ data_current_user['display_name'] }}</a><br>
+    <a class="userfollowers">{{ data_current_user['followers']['total'] }} Followers</a><br>
+    <a class="licence">{{ data_current_user['product'] }} account</a>
+    <br style="clear: both;" />
+    </p>
+  </section>
+
+  <article>
+  
+    <section class="saved_tracks">
+      <h4>{{ data_saved_tracks['total'] }}<h4>
+        <h5>saved songs</h5>
+      </section>
+
+    <section>
+      <h2>Recently played</h2>
+      <ol class="results">
+            {% for i in data_recently_played['items'] |list %}
+            <li>
+                <img class="results" src="{{ i['track']['album']['images'][0]['url'] }}"><br>
+                <a class="artist" href="{{ i['track'].artists[0].external_urls.spotify }}" target="_blank">{{ i['track']['album']['artists'][0]['name'] }}</a><br>
+                <a class="trackname" href="{{ i['track'].external_urls.spotify }}" target="_blank">♫ {{ i['track']['name'] }}</a><br>
+            </li>
+            {% endfor %}
+      <ol>
+      </section>
+  
+  
+    <section>
+      <h2>Top artists</h2>
+      <ol class="results">
+            {% for i in data_top_artists['items'][0:6] %}
+            <li>
+              <img class="results" src="{{ i['images'][0]['url'] }}"><br>
+                <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
+                <a class="genre">{{ i['genres'][0] }}</a><br>
+            </li>
+            {% endfor %} 
+      <ol>
+      </section>
+
+    <section>
+      <h2>Top tracks</h2>
+      <ol class="results">
+            {% for i in  data_top_tracks['items'] %}
+            <li>
+              <img class="results" src="{{ i['album']['images'][0]['url'] }}"><br>
+                <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i['artists'][0]['name'] }}</a><br>
+                <a href="{{ i['external_urls'].spotify }}" target="_blank" class="trackname" >♫ {{ i['name'] }}</a><br>
+            </li>
+            {% endfor %} 
+      <ol>
+      </section>
+
+
+    <section>
+      <h2>Top album or single</h2>
+      <ol class="results">
+            {% for i in data_top_tracks['items'][0:1] %}
+            <li>
+              <img class="results_top_album" src="{{ i['album']['images'][0]['url'] }}"><br>
+                <a class="artist">{{ i['artists'][0]['name'] }}</a><br>
+                <a class="artist">{{ i['album']['name'] }}</a><br>
+                <br>
+                <a class="artist">release_date:</a><br>
+                <a class="artist">{{ i['album']['release_date'] }}</a><br>
+                <br>
+                <a class="artist">#{{ i['album']['album_type'] }}</a><br>
+            </li>
+            {% endfor %} 
+      <ol>
+      </section>
+
+    <section>
+      <h2>Recommendations</h2>
+      <ol class="results">
+            {% for i in data_recommandations.artists['items'] %}
+            <li>
+              <img class="results" src="{{ i['images'][0]['url'] }}"><br>
+                <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
+                <a class="artistfollowers">👤 {{ i['followers']['total'] }}</a><br>
+            </li>
+            {% endfor %} 
+      <ol>
+      </section>
+
+    <section>
+      <a href="https://accounts.spotify.com/logout">{% include 'base64-disconnect.html' %}</a>
+    </section>
+
+
+
+  
+  </article>
+
+  <section class="about">
+    <p>
+      A track must be played for more than 30 seconds to be included in play history<br>
+      <br>
+      Artist images and album covers are provided by Spotify.<br>
+      This site is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Spotify. <br>
+      Spotify is a trademark of Spotify AB.<br>
+      <br>
+      Made by<a href="https://github.com/kenybapin" target="_blank">@kenybapin</a>
+      <br>
+    </p>
+  </section>
+
+
+</body>
+</html>
+
