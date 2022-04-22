@@ -1,24 +1,28 @@
-# FLASK Web app using spotify API
+# Run a FLASK Web app using spotify API
 
 
-[https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
+Run a Flask web application and display some of your Spotify.<br>
+View your top tracks, artists and album. Check out your recently played tracks.
+
+![image](preview.jpg?raw=true)
+
 <br>
- ![alt text](https://github.com/kenybapin/flask-spotify-app/blob/main/preview.jpg?raw=true)
 
+source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
 ## Requirements
 * Install **python3** with **requests** and **flask** librairies
 * Create a Spotify acount (sign up [here](www.spotify.com))
 * Go to your [Dashboard page](https://developer.spotify.com/dashboard/login) and create an app.
-  - Please note **CLIENT ID** and **CLIENT SECRET**
+  - Please note your own **CLIENT ID** and **CLIENT SECRET**
   - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* (for local use, 5000 is the default flask port)
  
 
 ## Setup
-1. git clone
+1. git clone project
 ```
 $ git clone https://github.com/kenybapin/flask-spotify-app/
 ```
-2. Open **app.py** and changes theses values according to your spotify app:
+2. Open **app.py** and according to your spotify app, edit these variables values : 
    - APP_ID (CLIENT ID)
    - APP_SECRET (CLIENT SECRET)
    - REDIRECT_URI
@@ -36,7 +40,7 @@ $ python3 app.py
 ```
 
 ## Known issues
-- Token expiration error after 1 hour.<br>
+- Get an Unhandled error when user token is expired after 1 hour session.
 *Access tokens issued from the Spotify account service has a lifetime of one hour.*
 
 Workaround: Refresh your webpage or restart Flask app.
