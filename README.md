@@ -1,41 +1,38 @@
-# Create a spotify app with flask
+# FLASK Web app using spotify API
 
+
+[https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
+<br>
+:screen:
 
 ## Requirements
-- python3
-- requests
-- flask
+* Install **python3** with **requests** and **flask** librairies
+* Create a Spotify acount (sign up [here](www.spotify.com))
+* Go to your [Dashboard page](https://developer.spotify.com/dashboard/login) and create an app.
+  - Please note **CLIENT ID** and **CLIENT SECRET**
+  - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* (for local use, 5000 is the default flask port)
+ 
 
+## Setup
+1. git clone
+```
+$ git clone https://github.com/kenybapin/flask-spotify-app/
+```
+2. Open **app.py** and changes theses values according to your spotify app:
+   - APP_ID (CLIENT ID)
+   - APP_SECRET (CLIENT SECRET)
+   - REDIRECT_URI
 
-## Notes
-- Authentification (token)
-- What is callback URI ?
-- Spotify API (top artists stats)
-
-
-## Setup (local use)
-1. git clone project
-```
-git clone
-```
-2. modify app.py with callback URI, client ID and secret
-```
-How to get Spotify callback URI, client ID and secret ?
-https://support.heateor.com/get-spotify-client-id-client-secret/
-```
-3. launch app
+4. Run the Web Application
 ``` 
-python3 app.py
-```
-4. Access
-```
-http://127.0.0.1:5000/
-```
+$ python3 app.py
 
-# TO DO
-1. Secure flask with HTTPS
-2. Hosting your APP on cloud
-2.1. HTTPS cerificate (cloudfare)
-2.2. Cloud RUN (hebergement de l'application + nom de domaine + certificat https ???)
+* Serving Flask app "app" (lazy loading)
+* Environment: production
+  WARNING: This is a development server. Do not use it in a production deployment.
+  Use a production WSGI server instead.
+* Debug mode: off
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
 
 
