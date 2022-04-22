@@ -3,7 +3,7 @@
 
 [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
 <br>
-:screen:
+ ![alt text](https://github.com/kenybapin/flask-spotify-app/blob/main/preview.jpg?raw=true)
 
 ## Requirements
 * Install **python3** with **requests** and **flask** librairies
@@ -35,4 +35,8 @@ $ python3 app.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
+## Known issues
+- Token expiration error after 1 hour.
+*Access tokens issued from the Spotify account service has a lifetime of one hour.*
 
+Workaround: Refresh your webpage or restart Flask app.
