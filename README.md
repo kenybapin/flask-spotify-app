@@ -36,7 +36,7 @@ $ python3 app.py
 ```
 
 ## Known issues
-- Token expiration error after 1 hour.
+- Token expiration error after 1 hour.<br>
 *Access tokens issued from the Spotify account service has a lifetime of one hour.*
 
 Workaround: Refresh your webpage or restart Flask app.
