@@ -6,9 +6,9 @@ View your top tracks, artists and album. Check out your recently played tracks.
 
 ![image](preview.jpg?raw=true)
 
-<br>
-
 source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
+
+<br><br>
 ## Requirements
 * Install **python3** with **requests** and **flask** librairies
 * Create a Spotify acount (sign up [here](www.spotify.com))
