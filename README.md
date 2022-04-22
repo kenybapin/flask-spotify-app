@@ -17,7 +17,8 @@ source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
   - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* (for local use, 5000 is the default flask port)
  
 
-## Setup
+# Setup
+
 1. git clone project
 ```
 $ git clone https://github.com/kenybapin/flask-spotify-app/
@@ -27,7 +28,8 @@ $ git clone https://github.com/kenybapin/flask-spotify-app/
    - APP_SECRET (CLIENT SECRET)
    - REDIRECT_URI
 
-4. Run the Web Application
+# Run with python
+
 ``` 
 $ python3 app.py
 
@@ -39,8 +41,24 @@ $ python3 app.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-## Known issues
-- Get an Unhandled error when user token is expired after 1 hour session.
-*Access tokens issued from the Spotify account service has a lifetime of one hour.*
+    
+# Run as container (docker)
+1. Edit **app.py** and add os module
+```
+import os
+```
+2. Then, config your app with custom listening port and address
+```
+app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+```
+3. Finaly, build and run in a container 
+```
+docker build -t my-flask-app:latest .
+docker run -it --rm -p 8080:8080 my-flask-app:latest
+```    
 
-Workaround: Refresh your webpage or restart Flask app.
+
+## Known issues
+- "Unhandled error" when user token is expired after 1 hour session.<br>
+*Access tokens issued from the Spotify account service has a lifetime of one hour.* <br>
+==> Workaround: Refresh your webpage or restart Flask app.
