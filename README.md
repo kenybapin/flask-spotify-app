@@ -56,10 +56,4 @@ app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 ```
 docker build -t my-flask-app:latest .
 docker run -it --rm -p 5000:5000 my-flask-app:latest
-```    
-
-
-## Known issues
-- "Unhandled error" when user token is expired after 1 hour session.<br>
-*Access tokens issued from the Spotify account service has a lifetime of one hour.* <br>
-==> Workaround: Refresh your webpage or restart Flask app.
+```
