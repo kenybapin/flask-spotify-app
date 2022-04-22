@@ -14,7 +14,8 @@ source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
 * Create a Spotify acount (sign up [here](www.spotify.com))
 * Go to your [Dashboard page](https://developer.spotify.com/dashboard/login) and create an app.
   - Please note your own **CLIENT ID** and **CLIENT SECRET**
-  - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* (for local use, 5000 is the default flask port)
+  - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* <br>
+    *loopback address for local use, 5000 is the default flask port*
  
 
 # Setup
