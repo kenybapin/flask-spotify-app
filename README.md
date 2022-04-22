@@ -49,12 +49,12 @@ import os
 ```
 2. Then, config your app with custom listening port and address
 ```
-app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 ```
 3. Finaly, build and run in a container 
 ```
 docker build -t my-flask-app:latest .
-docker run -it --rm -p 8080:8080 my-flask-app:latest
+docker run -it --rm -p 5000:5000 my-flask-app:latest
 ```    
 
 
