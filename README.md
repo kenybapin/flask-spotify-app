@@ -1,7 +1,7 @@
 # Run a FLASK Web app using spotify API
 
 
-Run a Flask web application and display some of your Spotify.<br>
+Run a Flask web application and display some of your Spotify content :<br>
 View your top tracks, artists and album. Check out your recently played tracks.
 
 ![image](preview.jpg?raw=true)
