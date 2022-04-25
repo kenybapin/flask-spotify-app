@@ -8,7 +8,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 </head>
 
+
+<div id="background-wrap">
+  <div class="x1"><div class="cloud"></div></div>
+  <div class="x2"><div class="cloud"></div></div>
+  <div class="x3"><div class="cloud"></div></div>
+  <div class="x4"><div class="cloud"></div></div>
+  <div class="x5"><div class="cloud"></div></div>
+  <div class="x1"><div class="cloud"></div></div>
+  <div class="x2"><div class="cloud"></div></div>
+  <div class="x3"><div class="cloud"></div></div>
+  <div class="x4"><div class="cloud"></div></div>
+  <div class="x5"><div class="cloud"></div></div>
+</div>
+
+
 <body>
+
 
 
   <section class="avatar">
@@ -24,6 +40,10 @@
 
   <article>
   
+
+
+
+
     <section class="saved_tracks">
       <h4>{{ data_saved_tracks['total'] }}<h4>
         <h5>saved songs</h5>
@@ -95,20 +115,20 @@
             <li>
               <img class="results" src="{{ i['images'][0]['url'] }}"><br>
                 <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
-                <a class="artistfollowers">👤 {{ i['followers']['total'] }}</a><br>
+                <a class="artistfollowers">❤ {{ i['followers']['total'] }}</a><br>
             </li>
             {% endfor %} 
       <ol>
       </section>
 
-    <section>
-      <a href="https://accounts.spotify.com/logout">{% include 'base64-disconnect.html' %}</a>
-    </section>
 
 
 
   
   </article>
+
+
+
 
   <section class="about">
     <p>
@@ -125,5 +145,8 @@
 
 
 </body>
+
+
+
 </html>
 
