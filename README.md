@@ -10,12 +10,16 @@ source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
 
 <br><br>
 ## Requirements
-* Install **python3** with **requests** and **flask** librairies
-* Create a Spotify acount (sign up [here](www.spotify.com))
+* **python3** with **requests** and **flask** librairies
+```
+$ pip3 install requests
+$ pip3 install flask
+```
+* Create a Spotify account (sign up [here](www.spotify.com))
 * Go to your [Dashboard page](https://developer.spotify.com/dashboard/login) and create an app.
-  - Please note your own **CLIENT ID** and **CLIENT SECRET**
+  - Remember your **CLIENT ID** and **CLIENT SECRET**
   - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* <br>
-    *loopback address for local use, 5000 is the default flask port*
+    *loopback address for local use, 5000 is your default flask port*
  
 
 # Setup
@@ -24,7 +28,7 @@ source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
 ```
 $ git clone https://github.com/kenybapin/flask-spotify-app/
 ```
-2. Open **app.py** and according to your spotify app, edit these variables values : 
+2. Open **app.py** and according to your spotify app, edit the following values : 
    - APP_ID (CLIENT ID)
    - APP_SECRET (CLIENT SECRET)
    - REDIRECT_URI
