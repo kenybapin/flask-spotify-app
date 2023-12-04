@@ -6,47 +6,40 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="theme-color" content="black">
 </head>
-
-
-<div id="background-wrap">
-  <div class="x1"><div class="cloud"></div></div>
-  <div class="x2"><div class="cloud"></div></div>
-  <div class="x3"><div class="cloud"></div></div>
-  <div class="x4"><div class="cloud"></div></div>
-  <div class="x5"><div class="cloud"></div></div>
-  <div class="x1"><div class="cloud"></div></div>
-  <div class="x2"><div class="cloud"></div></div>
-  <div class="x3"><div class="cloud"></div></div>
-  <div class="x4"><div class="cloud"></div></div>
-  <div class="x5"><div class="cloud"></div></div>
-</div>
-
 
 <body>
 
+<div class="menu">
+  <a class="maintitle">{% include 'base64-logo.html' %}</a>
+</div>
 
-
-  <section class="avatar">
-    <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
+  <!-- <section class="avatar">
     <p>
-    <a class="maintitle">{% include 'base64-logo.html' %} </a><br>
-    <a class="username">{{ data_current_user['display_name'] }}</a><br>
-    <a class="userfollowers">{{ data_current_user['followers']['total'] }} Followers</a><br>
-    <a class="licence">{{ data_current_user['product'] }} account</a>
+
+
     <br style="clear: both;" />
     </p>
-  </section>
+  </section> -->
+
+
 
   <article>
-  
 
-
-
+    <section class="avatar">
+      <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
+      <p>
+      <a class="username">{{ data_current_user['display_name'] }}</a><br>
+      <a class="userfollowers">{{ data_current_user['followers']['total'] }} Followers</a><br>
+      <a class="licence">{{ data_current_user['product'] }} account</a>
+      <br style="clear: both;" />
+      </p>
+      </section>
 
     <section class="saved_tracks">
-      <h4>{{ data_saved_tracks['total'] }}<h4>
-        <h5>saved songs</h5>
+      <h4>{{ data_saved_tracks['total'] }} ♥ <h4>
+        <h5>liked songs</h5>
       </section>
 
     <section>
@@ -61,8 +54,8 @@
             {% endfor %}
       <ol>
       </section>
-  
-  
+
+
     <section>
       <h2>Top artists</h2>
       <ol class="results">
@@ -72,7 +65,7 @@
                 <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
                 <a class="genre">{{ i['genres'][0] }}</a><br>
             </li>
-            {% endfor %} 
+            {% endfor %}
       <ol>
       </section>
 
@@ -85,7 +78,7 @@
                 <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i['artists'][0]['name'] }}</a><br>
                 <a href="{{ i['external_urls'].spotify }}" target="_blank" class="trackname" >♫ {{ i['name'] }}</a><br>
             </li>
-            {% endfor %} 
+            {% endfor %}
       <ol>
       </section>
 
@@ -104,7 +97,7 @@
                 <br>
                 <a class="artist">#{{ i['album']['album_type'] }}</a><br>
             </li>
-            {% endfor %} 
+            {% endfor %}
       <ol>
       </section>
 
@@ -117,14 +110,14 @@
                 <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
                 <a class="artistfollowers">❤ {{ i['followers']['total'] }}</a><br>
             </li>
-            {% endfor %} 
+            {% endfor %}
       <ol>
       </section>
 
 
 
 
-  
+
   </article>
 
 
@@ -138,7 +131,7 @@
       This site is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Spotify. <br>
       Spotify is a trademark of Spotify AB.<br>
       <br>
-      Made by<a href="https://github.com/kenybapin" target="_blank">@kenybapin</a>
+      <a href="https://github.com/kenybapin" target="_blank">@kenybapin</a>
       <br>
     </p>
   </section>
