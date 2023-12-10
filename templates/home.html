@@ -3,9 +3,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YourStats Spotify</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="javascript" href="https://cdn.jsdelivr.net/npm/chart.js">
     <meta name="theme-color" content="black">
 </head>
 
@@ -15,31 +16,78 @@
   <a class="maintitle">{% include 'base64-logo.html' %}</a>
 </div>
 
-  <!-- <section class="avatar">
-    <p>
-
-
-    <br style="clear: both;" />
-    </p>
-  </section> -->
-
-
-
   <article>
 
     <section class="avatar">
       <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
       <p>
       <a class="username">{{ data_current_user['display_name'] }}</a><br>
-      <a class="userfollowers">{{ data_current_user['followers']['total'] }} Followers</a><br>
+
       <a class="licence">{{ data_current_user['product'] }} account</a>
       <br style="clear: both;" />
       </p>
       </section>
 
-    <section class="saved_tracks">
-      <h4>{{ data_saved_tracks['total'] }} ♥ <h4>
-        <h5>liked songs</h5>
+      <section>
+        <h2>Followers</h2>
+        <h4>{{ data_current_user['followers']['total'] }}<h4>
+        </section>
+
+      <section>
+        <h2>Top genres</h2>
+        <div class="container" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+        <canvas id="myPieChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var data = {
+                labels: [{% for item in top_10_genres %}"{{ item[0] }}",{% endfor %}],
+                datasets: [{
+                    data: [{% for item in top_10_genres %}{{ item[1] }},{% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            var options = {
+                animation: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                },
+            };
+            var myPieChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: options
+            });
+        });
+    </script>
+        </section>
+
+
+    <section>
+      <h2>liked songs</h2>
+      <h4>{{ data_saved_tracks['total'] }} <h4>
       </section>
 
     <section>
@@ -70,7 +118,7 @@
       </section>
 
     <section>
-      <h2>Top tracks</h2>
+      <h2>Top songs</h2>
       <ol class="results">
             {% for i in  data_top_tracks['items'] %}
             <li>
@@ -89,33 +137,28 @@
             {% for i in data_top_tracks['items'][0:1] %}
             <li>
               <img class="results_top_album" src="{{ i['album']['images'][0]['url'] }}"><br>
+                <a class="artist">💿{{ i['album']['album_type'] }}</a><br>
                 <a class="artist">{{ i['artists'][0]['name'] }}</a><br>
                 <a class="artist">{{ i['album']['name'] }}</a><br>
-                <br>
-                <a class="artist">release_date:</a><br>
                 <a class="artist">{{ i['album']['release_date'] }}</a><br>
                 <br>
-                <a class="artist">#{{ i['album']['album_type'] }}</a><br>
-            </li>
-            {% endfor %}
-      <ol>
-      </section>
-
-    <section>
-      <h2>Recommendations</h2>
-      <ol class="results">
-            {% for i in data_recommandations.artists['items'] %}
-            <li>
-              <img class="results" src="{{ i['images'][0]['url'] }}"><br>
-                <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
-                <a class="artistfollowers">❤ {{ i['followers']['total'] }}</a><br>
+                
             </li>
             {% endfor %}
       <ol>
       </section>
 
 
-
+      <section>
+        <h2>Recommendations</h2>
+        <ol class="results">
+          {% for i in data_recommendations['tracks'] %}
+          <li>
+            <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i["album"]["artists"][0]["name"] }}</a><br>
+          </li>
+          {% endfor %}
+    <ol>
+      </section>
 
 
   </article>
