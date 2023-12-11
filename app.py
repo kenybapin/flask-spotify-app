@@ -1,6 +1,3 @@
-
-# A very simple Flask Hello World app for you to get started with...
-
 from flask import Flask, render_template, redirect, request, session
 import requests
 
@@ -26,16 +23,6 @@ url_saved_tracks = 'https://api.spotify.com/v1/me/tracks?limit=5&offset=5'
 url_recently_played = 'https://api.spotify.com/v1/me/player/recently-played?limit=10&offset=5'
 url_current_user = 'https://api.spotify.com/v1/me'
 url_top_genres = 'https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=100&offset=0'
-
-# to do 
-url_variables = {
-    'url_top_artists': 'https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=5&offset=5',
-    'url_top_tracks': 'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5&offset=5',
-    'url_saved_tracks': 'https://api.spotify.com/v1/me/tracks?limit=5&offset=5',
-    'url_recently_played': 'https://api.spotify.com/v1/me/player/recently-played?limit=10&offset=5',
-    'url_current_user': 'https://api.spotify.com/v1/me',
-    'url_top_genres': 'https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=100&offset=0'
-}
 
 
 # AUTH Step 1: log in and Request for User Authorization
