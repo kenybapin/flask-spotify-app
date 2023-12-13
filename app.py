@@ -1,5 +1,6 @@
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, url_for, abort
 import requests
+from requests.exceptions import RequestException, HTTPError
 
 app = Flask(__name__)
 
@@ -7,8 +8,8 @@ app = Flask(__name__)
 # Disabling cache,  note:  Flask didn't see the updates in JS and CSS files
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-APP_ID = '######'
-APP_SECRET = '######'
+APP_ID = '####'
+APP_SECRET = '#####'
 app.secret_key = APP_SECRET
 
 API_BASE = 'https://accounts.spotify.com'
@@ -51,20 +52,65 @@ def api_callback():
     session["token"] = res_body.get("access_token")
     return redirect("home")
 
+
+
+
 ## RETRIEVE DATA
 
-def get_genre_counts(data_top_genres):
-    genre_list = [genre['genres'] for genre in data_top_genres['items']]
+def fetch_data(url, headers):
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        return response.json()
+    except HTTPError as http_err:
+        if http_err.response.status_code == 403:
+            # Redirect to the forbidden_error handler
+            abort(403)
+        else:
+            print(f"HTTP error ({http_err.response.status_code}) when fetching data from {url}: {http_err}")
+            return None
+    except RequestException as e:
+        print(f"Error fetching data from {url}: {e}")
+        return None
+
+
+# Get the top5 genres
+def get_genres(data_top_genres, n=5):
+    if data_top_genres is None:
+        print("Error: data_top_genres is None")
+        return {}, []
+
+    genre_list = [genre['genres'] for genre in data_top_genres.get('items', [])]
     genre_counts = {}
 
     for artist_genres in genre_list:
         for genre in artist_genres:
             genre_counts[genre] = genre_counts.get(genre, 0) + 1
-    return genre_counts
 
-def get_top_n_genres(genre_counts, n=5):
+    if not genre_counts or len(genre_counts) == 0:
+        print("Error: genre_counts is empty")
+        return {}, []
+
     sorted_genres = sorted(genre_counts.items(), key=lambda x: x[1], reverse=True)[:n]
-    return sorted_genres
+    return genre_counts, sorted_genres
+
+
+# Capture the top1 genre and artist to use them in the recommendations URL.  
+def capture_top_genre_and_artist(data_top_artists, data_top_genres):
+    try:
+        top1_artist_id = data_top_artists['items'][0]['id']
+        genre_counts, _ = get_genres(data_top_genres, n=1)
+        top1_genre_result = list(genre_counts.keys())[0].replace(' ', '+')
+
+        if top1_artist_id is None or top1_genre_result is None:
+            raise ValueError("Top 1 artist ID or genre result is None")
+
+        return top1_artist_id, top1_genre_result
+
+    except (IndexError, KeyError, TypeError) as e:
+        # Handle the exception based on your requirements
+        print(f"Error in capture_top_genre_and_artist: {e}")
+        return None, None
 
 
 # HOME PAGE
@@ -74,24 +120,29 @@ def home():
     # Queries
     token = session["token"]
     header={"Content-Type":"application/json", "Authorization":f"Bearer {token}"}
-    data_top_artists = requests.get(url_top_artists, headers=header).json()
-    data_top_tracks = requests.get(url_top_tracks, headers=header).json()
-    data_saved_tracks = requests.get(url_saved_tracks, headers=header).json()
-    data_recently_played = requests.get(url_recently_played, headers=header).json()
-    data_current_user = requests.get(url_current_user, headers=header).json()
-    data_top_genres = requests.get(url_top_genres, headers=header).json()
+    
+    # Check if all requests are valid
+    data_top_artists = fetch_data(url_top_artists, header)
+    data_top_tracks = fetch_data(url_top_tracks, header)
+    data_saved_tracks = fetch_data(url_saved_tracks, header)
+    data_recently_played = fetch_data(url_recently_played, header)
+    data_current_user = fetch_data(url_current_user, header)
+    data_top_genres = fetch_data(url_top_genres, header)
 
+    # get_top5_genres
+    genre_counts, sorted_genres = get_genres(data_top_genres)
+    top_5_genres =  sorted_genres
 
-    # Get the top 10 genres by occurrences
-    genre_counts = get_genre_counts(data_top_genres)
-    top_10_genres = get_top_n_genres(genre_counts)
-
-    top1_artist_id = data_top_artists['items'][0]['id']
-    top1_genre = data_top_genres['items'][0]['genres'][0]
-    top1_genre_result = top1_genre.replace(' ', '+')
-
+    # capture_top_genre_and_artist
+    top1_artist_id, top1_genre_result = capture_top_genre_and_artist(data_top_artists, data_top_genres)
+    
+    # fetch recommendations
     url_recommendations = f'https://api.spotify.com/v1/recommendations?seed_artists={top1_artist_id}&seed_genres={top1_genre_result}&seed_tracks={top1_artist_id}'
-    data_recommendations = requests.get(url_recommendations, headers=header).json()
+    data_recommendations = fetch_data(url_recommendations, header)
+
+    # Check if any data is None and redirect to the error handler
+    if data_top_artists is None or data_top_tracks is None or data_recently_played is None:
+        abort(403)
 
     return render_template(
         "home.html",
@@ -100,14 +151,22 @@ def home():
         data_saved_tracks=data_saved_tracks,
         data_recently_played=data_recently_played,
         data_current_user=data_current_user,
-        top_10_genres=top_10_genres,
+        top_5_genres=top_5_genres,
         data_recommendations=data_recommendations
         )
 
+# favicon
+@app.route('/favicon.ico')
+def favicon():
+    return url_for('static', filename='image/favicon.ico')
+
 @app.errorhandler(500)
 def internal_server_error(e):
-    return 'Spotify was unable to gather all the necessary information, make sure you have listening time before going to this site', 500
+    return 'Internal Error', 500
 
+@app.errorhandler(403)
+def forbidden_error(error):
+    return render_template('403.html'), 403
 
 if __name__ == "__main__":
     app.run()
