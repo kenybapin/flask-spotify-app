@@ -6,8 +6,6 @@ View your top tracks, artists and album. Check out your recently played tracks.
 
 ![image](preview.jpg?raw=true)
 
-source: [https://kbapin.pythonanywhere.com/](https://kbapin.pythonanywhere.com/)
-
 <br><br>
 ## Requirements
 * **python3** with **requests** and **flask** librairies
@@ -21,6 +19,20 @@ $ pip3 install flask
   - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* <br>
     *loopback address for local use, 5000 is your default flask port*
  
+* Important notes related to user data
+```
+By default, your application is set to only collect your own data. 
+Other users are not allowed, which will result in a 403 error.
+
+How to allow other users to test your application ?
+
+a) If your application is in "developer mode", you need to add them via the Spotify Dashboard : 
+App > Settings > User Management.
+
+b) To boost your application's visibility and bypass manual user addition, switch your application to "extended quota mode" :
+App > Extension Request. 
+Following this, Spotify will examine and evaluate your application to ensure it aligns with their Developer Policy.<br><br>
+```
 
 # Setup
 
@@ -61,3 +73,6 @@ app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 docker build -t my-flask-app:latest .
 docker run -it --rm -p 5000:5000 my-flask-app:latest
 ```
+
+
+ 
