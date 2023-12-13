@@ -2,9 +2,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YourStats Spotify</title>
+    <title>Spotitrack</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="stylesheet" type="javascript" href="https://cdn.jsdelivr.net/npm/chart.js">
     <meta name="theme-color" content="black">
@@ -13,160 +12,216 @@
 <body>
 
 <div class="menu">
-  <a class="maintitle">{% include 'base64-logo.html' %}</a>
+  <a class="maintitle">🌍 SpotiTrack</a>
 </div>
 
   <article>
 
+    <section class="maintitle">
+      <img class="mainlogo" style="vertical-align:center" src="/static/image/transparent_logo.png">
+    </section>
+
     <section class="avatar">
-      <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
-      <p>
-      <a class="username">{{ data_current_user['display_name'] }}</a><br>
+      {% if data_current_user %}
+        {% if 'images' in data_current_user and data_current_user['images'] %}
+          <img class="avatar" style="vertical-align:center" src="{{ data_current_user['images'][0]['url'] }}">
+        {% else %}
+          <img class="avatar" style="vertical-align:center" src="/static/image/default_avatar.png">
+        {% endif %}
+        
+        <p>
+          <a class="username">{{ data_current_user['display_name'] }}</a><br>
+          
+          {% if 'product' in data_current_user %}
+            <a class="licence">{{ data_current_user['product'] }} account</a>
+          {% else %}
+            <a class="licence">Default Account Type</a>
+          {% endif %}
+          
+          <br style="clear: both;" />
+        </p>
+      {% else %}
+      &#8203; <!-- no data found -->
+      {% endif %}
+    </section>
 
-      <a class="licence">{{ data_current_user['product'] }} account</a>
-      <br style="clear: both;" />
-      </p>
-      </section>
 
-      <section>
-        <h2>Followers</h2>
-        <h4>{{ data_current_user['followers']['total'] }}<h4>
-        </section>
-
-      <section>
-        <h2>Top genres</h2>
-        <div class="container" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
-        <canvas id="myPieChart"></canvas>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myPieChart').getContext('2d');
-            var data = {
-                labels: [{% for item in top_10_genres %}"{{ item[0] }}",{% endfor %}],
-                datasets: [{
-                    data: [{% for item in top_10_genres %}{{ item[1] }},{% endfor %}],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            };
-            var options = {
-                animation: false,
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                },
-            };
-            var myPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: data,
-                options: options
-            });
-        });
-    </script>
+        <section>
+          <h2>Followers</h2>
+          
+          {% if data_current_user and 'followers' in data_current_user and 'total' in data_current_user['followers'] %}
+            <h4>{{ data_current_user['followers']['total'] }}</h4>
+          {% else %}
+          &#8203; <!-- no data found -->
+          {% endif %}
         </section>
 
 
-    <section>
-      <h2>liked songs</h2>
-      <h4>{{ data_saved_tracks['total'] }} <h4>
+      
+        <section>
+          <h2>Top genres</h2>
+          <div class="container" style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;">
+              {% if top_5_genres %}
+                  <canvas id="myPieChart"></canvas>
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                  <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                          var ctx = document.getElementById('myPieChart').getContext('2d');
+                          var data = {
+                              labels: [{% for item in top_5_genres %}"{{ item[0] }}",{% endfor %}],
+                              datasets: [{
+                                  data: [{% for item in top_5_genres %}{{ item[1] }},{% endfor %}],
+                                  backgroundColor: [
+                                      'rgba(255, 99, 132, 0.7)',
+                                      'rgba(54, 162, 235, 0.7)',
+                                      'rgba(255, 206, 86, 0.7)',
+                                      'rgba(75, 192, 192, 0.7)',
+                                      'rgba(153, 102, 255, 0.7)',
+                                  ],
+                                  borderColor: [
+                                      'rgba(255, 99, 132, 1)',
+                                      'rgba(54, 162, 235, 1)',
+                                      'rgba(255, 206, 86, 1)',
+                                      'rgba(75, 192, 192, 1)',
+                                      'rgba(153, 102, 255, 1)',
+                                  ],
+                                  borderWidth: 1
+                              }]
+                          };
+                          var options = {
+                              animation: false,
+                              responsive: true,
+                              maintainAspectRatio: false,
+                              plugins: {
+                                legend: {
+                                  display: true,
+                                  position: "right",
+                                  labels: {
+                                    color: 'white' // Set legend text color to white
+                                  }
+                                },
+                              },
+                          };
+                          var myPieChart = new Chart(ctx, {
+                              type: 'doughnut',
+                              data: data,
+                              options: options
+                          });
+                      });
+                  </script>
+              {% else %}
+              &#8203; <!-- no data found -->
+              {% endif %}
+          </div>
       </section>
 
-    <section>
-      <h2>Recently played</h2>
-      <ol class="results">
+      <section>
+        <h2>liked songs</h2>
+        {% if data_saved_tracks %}
+          <h4>{{ data_saved_tracks['total'] }}</h4>
+        {% else %}
+        &#8203; <!-- no data found -->
+        {% endif %}
+      </section>
+
+      <section>
+        <h2>Recently played</h2>
+        <ol class="results">
+          {% if data_recently_played and data_recently_played['items'] %}
             {% for i in data_recently_played['items'] |list %}
-            <li>
+              <li>
+
+
                 <img class="results" src="{{ i['track']['album']['images'][0]['url'] }}"><br>
+
                 <a class="artist" href="{{ i['track'].artists[0].external_urls.spotify }}" target="_blank">{{ i['track']['album']['artists'][0]['name'] }}</a><br>
                 <a class="trackname" href="{{ i['track'].external_urls.spotify }}" target="_blank">♫ {{ i['track']['name'] }}</a><br>
-            </li>
+              </li>
             {% endfor %}
-      <ol>
+        </ol>
+          {% else %}
+          &#8203; <!-- no data found -->
+          {% endif %}
       </section>
 
 
-    <section>
-      <h2>Top artists</h2>
-      <ol class="results">
+      <section>
+        <h2>Top artists</h2>
+        {% if data_top_artists and data_top_artists['items'] %}
+          <ol class="results">
             {% for i in data_top_artists['items'][0:6] %}
-            <li>
-              <img class="results" src="{{ i['images'][0]['url'] }}"><br>
+              <li>
+                <img class="results" src="{{ i['images'][0]['url'] }}"><br>
                 <a href="{{ i['external_urls'].spotify }}" target="_blank" class="artist">{{ i['name'] }}</a><br>
                 <a class="genre">{{ i['genres'][0] }}</a><br>
-            </li>
+              </li>
             {% endfor %}
-      <ol>
+          </ol>
+        {% else %}
+        &#8203; <!-- no data found -->
+        {% endif %}
       </section>
 
-    <section>
-      <h2>Top songs</h2>
-      <ol class="results">
-            {% for i in  data_top_tracks['items'] %}
-            <li>
-              <img class="results" src="{{ i['album']['images'][0]['url'] }}"><br>
-                <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i['artists'][0]['name'] }}</a><br>
-                <a href="{{ i['external_urls'].spotify }}" target="_blank" class="trackname" >♫ {{ i['name'] }}</a><br>
-            </li>
-            {% endfor %}
-      <ol>
-      </section>
+      <section>
+        <h2>Top songs</h2>
+        {% if data_top_tracks and data_top_tracks['items'] %}
+            <ol class="results">
+                {% for i in  data_top_tracks['items'] %}
+                    <li>
+                        <img class="results" src="{{ i['album']['images'][0]['url'] }}"><br>
+                        <a href="{{ i['album']['artists'][0]['external_urls']['spotify'] }}" target="_blank" class="artist">{{ i['artists'][0]['name'] }}</a><br>
+                        <a href="{{ i['external_urls']['spotify'] }}" target="_blank" class="trackname" >♫ {{ i['name'] }}</a><br>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+        &#8203; <!-- no data found -->
+        {% endif %}
+    </section>
 
 
     <section>
       <h2>Top album or single</h2>
       <ol class="results">
-            {% for i in data_top_tracks['items'][0:1] %}
-            <li>
-              <img class="results_top_album" src="{{ i['album']['images'][0]['url'] }}"><br>
-                <a class="artist">💿{{ i['album']['album_type'] }}</a><br>
-                <a class="artist">{{ i['artists'][0]['name'] }}</a><br>
-                <a class="artist">{{ i['album']['name'] }}</a><br>
-                <a class="artist">{{ i['album']['release_date'] }}</a><br>
-                <br>
-                
-            </li>
-            {% endfor %}
+            {% if data_top_tracks is defined and data_top_tracks['items'] %}
+              {% for i in data_top_tracks['items'][0:1] %}
+              <li>
+                <img class="results_top_album" src="{{ i['album']['images'][0]['url'] }}"><br>
+                  <a class="artist">💿{{ i['album']['album_type'] }}</a><br>
+                  <a class="artist">{{ i['artists'][0]['name'] }}</a><br>
+                  <a class="artist">{{ i['album']['name'] }}</a><br>
+                  <a class="artist">{{ i['album']['release_date'] }}</a><br>
+                  <br>
+              </li>
+              {% endfor %}
       <ol>
-      </section>
+            {% else %}
+            &#8203; <!-- no data found -->
+            {% endif %}
+    </section>
 
 
-      <section>
-        <h2>Recommendations</h2>
+    <section>
+      <h2>Recommendations</h2>
+      {% if data_recommendations %}
         <ol class="results">
           {% for i in data_recommendations['tracks'] %}
-          <li>
-            <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i["album"]["artists"][0]["name"] }}</a><br>
-          </li>
+            <li>
+              <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i["album"]["artists"][0]["name"] }}</a><br>
+            </li>
           {% endfor %}
-    <ol>
-      </section>
+        </ol>
+      {% else %}
+      &#8203; <!-- no data found -->
+      {% endif %}
+    </section>
+
+
 
 
   </article>
 
-
-
-
-  <section class="about">
+  <footer>
     <p>
       A track must be played for more than 30 seconds to be included in play history<br>
       <br>
@@ -177,7 +232,7 @@
       <a href="https://github.com/kenybapin" target="_blank">@kenybapin</a>
       <br>
     </p>
-  </section>
+  </footer>
 
 
 </body>
