@@ -18,22 +18,23 @@ $ pip3 install flask
   - Remember your **CLIENT ID** and **CLIENT SECRET**
   - Edit settings > add a Redirect URI with *http://127.0.0.1:5000/api_callback* <br>
     *loopback address for local use, 5000 is your default flask port*
- 
-* Important notes related to user data
-```
+
+<br><br>
+## Notes related to user data
+
 By default, your application is set to only collect your own data. 
 Other users are not allowed, which will result in a 403 error.
 
-How to allow other users to test your application ?
+**How to allow other users to test your application ?**
 
-a) If your application is in "developer mode", you need to add them via the Spotify Dashboard : 
-App > Settings > User Management.
+a) If your application is in "developer mode", you need to add them via the Spotify Dashboard :<br> 
+*App > Settings > User Management.*
 
-b) To boost your application's visibility and bypass manual user addition, switch your application to "extended quota mode" :
-App > Extension Request. 
-Following this, Spotify will examine and evaluate your application to ensure it aligns with their Developer Policy.<br><br>
-```
+b) To boost your application's visibility and bypass manual user addition, switch your application to "extended quota mode" :<br>
+*App > Extension Request.* <br>
+Following this, Spotify will examine and evaluate your application to ensure it aligns with their [Developer Policy](https://developer.spotify.com/policy).<br><br>
 
+<br><br>
 # Setup
 
 1. git clone project
