@@ -32,6 +32,7 @@ a) On "developer mode", you need to add them via the Spotify [Dashboard](https:/
 
 b) To boost your application's visibility and bypass manual user addition, switch your application to "extended quota mode" :<br>
 *App > Extension Request.* <br>
+<br>
 Following this, Spotify will examine and evaluate your application to ensure it aligns with their [Developer Policy](https://developer.spotify.com/policy).<br><br>
 
 <br><br>
