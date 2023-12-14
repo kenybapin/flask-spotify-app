@@ -22,12 +22,12 @@ $ pip3 install flask
 <br><br>
 ## Notes related to user data
 
-By default, your application is set to only collect your own data. 
-Other users are not allowed, which will result in a 403 error.
+"By default, your application is set to 'developer mode,'<br>
+In this mode, you can collect only your own data, and other users face restricted access, resulting in a 403 error.<br>
 
 **How to allow other users to test your application ?**
 
-a) If your application is in "developer mode", you need to add them via the Spotify Dashboard :<br> 
+a) On "developer mode", you need to add them via the Spotify [Dashboard](https://developer.spotify.com/dashboard/login) :<br> 
 *App > Settings > User Management.*
 
 b) To boost your application's visibility and bypass manual user addition, switch your application to "extended quota mode" :<br>
