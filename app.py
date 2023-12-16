@@ -8,13 +8,13 @@ app = Flask(__name__)
 # Disabling cache,  note:  Flask didn't see the updates in JS and CSS files
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-APP_ID = '####'
+APP_ID = '######'
 APP_SECRET = '#####'
 app.secret_key = APP_SECRET
 
 API_BASE = 'https://accounts.spotify.com'
 REDIRECT_URI = "http://127.0.0.1:5000/api_callback"
-SCOPE = 'user-top-read,user-library-read,user-read-recently-played,user-read-private,user-read-email,user-follow-read'
+SCOPE = 'user-top-read,user-library-read,user-read-recently-played,user-read-private,user-follow-read'
 SHOW_DIALOG = True
 
 # URLs
@@ -56,6 +56,24 @@ def api_callback():
 
 
 ## RETRIEVE DATA
+
+# Check data from URLs
+# def fetch_data(url, headers):
+#     try:
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()  # Raise an exception for HTTP errors (status codes other than 2xx)
+#         return response.json()
+#     except HTTPError as http_err:
+#         if http_err.response.status_code == 403:
+#             # Handle 403 error (e.g., print a message or return a specific value)
+#             print(f"Access forbidden (403) when fetching data from {url}")
+#             return None
+#         else:
+#             print(f"HTTP error ({http_err.response.status_code}) when fetching data from {url}: {http_err}")
+#             return None
+#     except RequestException as e:
+#         print(f"Error fetching data from {url}: {e}")
+#         return None
 
 def fetch_data(url, headers):
     try:
