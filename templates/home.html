@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotitrack</title>
+    <title>GrooveHistory</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="stylesheet" type="javascript" href="https://cdn.jsdelivr.net/npm/chart.js">
@@ -12,14 +12,10 @@
 <body>
 
 <div class="menu">
-  <a class="maintitle">🌍 SpotiTrack</a>
+  <a class="maintitle">🌍 GrooveHistory</a>
 </div>
 
   <article>
-
-    <section class="maintitle">
-      <img class="mainlogo" style="vertical-align:center" src="/static/image/transparent_logo.png">
-    </section>
 
     <section class="avatar">
       {% if data_current_user %}
@@ -135,7 +131,7 @@
                 <img class="results" src="{{ i['track']['album']['images'][0]['url'] }}"><br>
 
                 <a class="artist" href="{{ i['track'].artists[0].external_urls.spotify }}" target="_blank">{{ i['track']['album']['artists'][0]['name'] }}</a><br>
-                <a class="trackname" href="{{ i['track'].external_urls.spotify }}" target="_blank">♫ {{ i['track']['name'] }}</a><br>
+                <a class="trackname" href="{{ i['track'].external_urls.spotify }}" target="_blank">{{ i['track']['name'] }}</a><br>
               </li>
             {% endfor %}
         </ol>
@@ -170,7 +166,7 @@
                     <li>
                         <img class="results" src="{{ i['album']['images'][0]['url'] }}"><br>
                         <a href="{{ i['album']['artists'][0]['external_urls']['spotify'] }}" target="_blank" class="artist">{{ i['artists'][0]['name'] }}</a><br>
-                        <a href="{{ i['external_urls']['spotify'] }}" target="_blank" class="trackname" >♫ {{ i['name'] }}</a><br>
+                        <a href="{{ i['external_urls']['spotify'] }}" target="_blank" class="trackname" >{{ i['name'] }}</a><br>
                     </li>
                 {% endfor %}
             </ol>
@@ -204,19 +200,17 @@
     <section>
       <h2>Recommendations</h2>
       {% if data_recommendations %}
-        <ol class="results">
+        <div class="grid">
           {% for i in data_recommendations['tracks'] %}
-            <li>
-              <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank" class="artist">{{ i["album"]["artists"][0]["name"] }}</a><br>
-            </li>
+          <div class="card">
+            <a href="{{ i['album'].artists[0].external_urls.spotify }}" target="_blank"><img src="{{ i['album'].images[0].url }}"></a>
+            </div> 
           {% endfor %}
-        </ol>
+        </div>
       {% else %}
       &#8203; <!-- no data found -->
       {% endif %}
     </section>
-
-
 
 
   </article>
@@ -229,7 +223,7 @@
       This site is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Spotify. <br>
       Spotify is a trademark of Spotify AB.<br>
       <br>
-      <a href="https://github.com/kenybapin" target="_blank">@kenybapin</a>
+      <a href="https://github.com/kenybapin" target="_blank">Github</a>
       <br>
     </p>
   </footer>
